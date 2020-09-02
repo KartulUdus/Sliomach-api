@@ -1,0 +1,13 @@
+{
+  "server": {
+    "port": 4420,
+    "host": "0.0.0.0"
+  },
+  "settings": {
+    "password": "verySecureAdminPassword"
+  },
+  "logger": {
+    "level": "info",
+    "logSize": 25
+  }
+}
