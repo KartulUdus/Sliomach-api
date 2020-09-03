@@ -1,5 +1,6 @@
 const config = require('config')
 const Knex = require('knex')
+const path = require('path')
 const fastify = require('fastify')()
 const fs = require('fs')
 const util = require('util')
