@@ -18,7 +18,8 @@ module.exports = async function(db, log) {
 		await db('measurements').insert({
 			temp: reading.temperature.toFixed(1),
 			humidity: reading.humidity.toFixed(1),
-			image: timestampFilename
+			image: timestampFilename,
+			time: new Date()
 		})
 	} catch (e) {
 		console.log('bad stuff happened', e)
