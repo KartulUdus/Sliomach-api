@@ -19,7 +19,7 @@ module.exports = async function(db, log) {
 			temp: reading.temperature.toFixed(1),
 			humidity: reading.humidity.toFixed(1),
 			image: timestampFilename,
-			time: new Date()
+			time: new Date().toISOString
 		})
 	} catch (e) {
 		console.log('bad stuff happened', e)
