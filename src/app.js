@@ -31,5 +31,5 @@ async function run(){
 }
 
 run()
-setInterval(Sensors(), 60000)
+setInterval(Sensors, 60000)
 
