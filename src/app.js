@@ -1,4 +1,5 @@
 const config = require('config')
+const Knex = require('knex')
 const fastify = require('fastify')()
 const fs = require('fs')
 const util = require('util')
@@ -6,6 +7,13 @@ const Path = require('path')
 const readDir = util.promisify(fs.readdir)
 const migrator = require('./lib/db/init')
 const Sensors = require('./sensors')
+
+const db = Knex({
+    client: 'sqlite3',
+    connection: {
+        filename: path.join(__dirname, './lib/db/database.sqlite'),
+    },
+})
 
 async function* readDirRecursive(path) {
     const entries = await readDir(path, { withFileTypes: true });
@@ -22,6 +30,7 @@ async function* readDirRecursive(path) {
 async function run(){
     await migrator()
     fastify.decorate('config', config)
+    fastify.decorate('db', db)
     const pathName = Path.resolve(__dirname, 'routes')
     for await(const route of readDirRecursive(pathName)) {
         fastify.register(require(route))
@@ -31,5 +40,6 @@ async function run(){
 }
 
 run()
-setInterval(Sensors, 60000)
+Sensors(db)
+setInterval(Sensors(db), 600000) // Take a picture and reading every 10 minutes
 
