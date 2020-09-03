@@ -4,8 +4,8 @@ const fs = require('fs')
 const util = require('util')
 const Path = require('path')
 const readDir = util.promisify(fs.readdir)
-
 const migrator = require('./lib/db/init')
+const Sensors = require('./sensors')
 
 async function* readDirRecursive(path) {
     const entries = await readDir(path, { withFileTypes: true });
@@ -31,4 +31,5 @@ async function run(){
 }
 
 run()
+setInterval(Sensors(), 60000)
 
