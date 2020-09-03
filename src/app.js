@@ -29,7 +29,7 @@ async function* readDirRecursive(path) {
 }
 
 async function run(){
-    await migrator()
+    await migrator(db)
     fastify.decorate('config', config)
     fastify.decorate('db', db)
     const pathName = Path.resolve(__dirname, 'routes')
