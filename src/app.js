@@ -41,5 +41,6 @@ async function run(){
 }
 
 run()
+Sensors(db)
 setInterval(() => Sensors(db), 600000) // Take a picture and reading every 10 minutes
 
