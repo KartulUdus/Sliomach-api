@@ -36,6 +36,7 @@ async function run(){
     const pathName = Path.resolve(__dirname, 'routes')
     for await(const route of readDirRecursive(pathName)) {
         fastify.register(require(route))
+        console.log(route)
     }
     await fastify.listen(config.server.port, config.server.host)
     console.log(`Service started on ${fastify.server.address().address}:${fastify.server.address().port}`)
